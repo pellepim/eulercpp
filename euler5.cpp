@@ -65,5 +65,5 @@ int main() {
     cout << " " << std::chrono::duration_cast<std::chrono::milliseconds>(after_brute-before_brute).count()  << "ms" << std::endl;
     cout << smarter();
     auto after_smarter = std::chrono::high_resolution_clock::now();
-    cout << " " << std::chrono::duration_cast<std::chrono::microseconds>(after_smarter-after_brute).count()  << "ms" << std::endl;
+    cout << " " << std::chrono::duration_cast<std::chrono::microseconds>(after_smarter-after_brute).count()  << "µs" << std::endl;
 }
