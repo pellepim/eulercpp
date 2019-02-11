@@ -26,6 +26,10 @@ euler6:
 	g++ -o euler6.out euler6.cpp
 	./euler6.out
 
+euler7:
+	g++ -o euler7.out primes.cpp euler7.cpp
+	./euler7.out
+
 clean:
 	@echo "Removing all *.out files"
 	rm *.out
