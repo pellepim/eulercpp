@@ -1,15 +1,10 @@
 #include <iostream>
-#include <vector>
-#include <stack>
 #include <queue>
-#include <chrono>
-#include <thread>
-
 
 using namespace std;
 
 int main() {
-    std::queue<int> queueOfThirteen; 
+    std::queue<int> queue13; 
     long maxValue = 0;
 
     const char *digits = "73167176531330624919225119674426574742355349194934"
@@ -40,38 +35,35 @@ int main() {
         
         // If the digit is zero, there's no need to add it to the queue
         // Instead we empty the queue and skip forward
-        if (digit == 0 && !queueOfThirteen.empty()) {
+        if (digit == 0 && !queue13.empty()) {
             std::queue<int> emptyQueue;
-            std::swap(queueOfThirteen, emptyQueue);
+            std::swap(queue13, emptyQueue);
             i += 1;
             continue;
         }
         
         // If the digit is non-zero, we add it to the queue
-        queueOfThirteen.push(digit);
+        queue13.push(digit);
 
         // If the queue is larger than 13 - we pop the front
-        if (queueOfThirteen.size() > 13) {
-            queueOfThirteen.pop();
+        if (queue13.size() > 13) {
+            queue13.pop();
         }
 
         // If the queue is exactly 13, then we calculate the product
         // of the digits in the queue. If the product is larger than
         // previous maxValue, we replace it.
-        if (queueOfThirteen.size() == 13) {
-            std::queue<int> tmpQueue = queueOfThirteen;
-            long currentProduct = 1;
-            
-            while(!tmpQueue.empty()) {
-                currentProduct *= tmpQueue.front();
-                tmpQueue.pop();
-            }
+        std::queue<int> tmpQueue = queue13;
+        long currentProduct = 1;
+        
+        while(!tmpQueue.empty()) {
+            currentProduct *= tmpQueue.front();
+            tmpQueue.pop();
+        }
 
-            if (currentProduct > maxValue) {
-                maxValue = currentProduct;
-            }
+        if (currentProduct > maxValue) {
+            maxValue = currentProduct;
         }
     }
-
     std::cout << maxValue << std::endl;
 }

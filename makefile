@@ -34,6 +34,14 @@ euler8:
 	g++ -o euler8.out euler8.cpp
 	./euler8.out
 
+iterateprimes:
+	g++ -o iterateprimes.out primes.cpp iterateprimes.cpp
+	./iterateprimes.out
+
+sieve:
+	g++ -o sieve.out primes.cpp sieve.cpp
+	./sieve.out 4000000
+
 clean:
 	@echo "Removing all *.out files"
 	rm *.out

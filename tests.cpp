@@ -1,5 +1,6 @@
 #include <iostream>
 #include "primes.h"
+#include "vectorutils.h"
 
 using namespace std;
 
@@ -30,12 +31,18 @@ bool test_prime_factorize() {
     return true;
 }
 
+bool test_primes_up_to() {
+    std::vector<int> primes = primes_to(400);
+    printvector(primes);  
+}
+
 int main() {
     if (test_is_prime() &&
-        test_prime_factorize()) {
+        test_prime_factorize() &&
+        test_primes_up_to()) {
         std::cout << "All tests are green\n";
         return 0;
-    } 
+    }
     
     std::cout << "Something is amiss\n";
     return 1;

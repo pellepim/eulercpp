@@ -2,6 +2,8 @@
 #include <math.h>
 #include <vector>
 #include "primes.h"
+#include <cstring>
+
 using namespace std;
 
  std::vector<int> primesUntil200 {
@@ -26,6 +28,11 @@ bool is_prime(long candidate) {
     if (candidate % 2 == 0 || candidate % 3 == 0) {
         return false;
     }
+
+    // If the candidate is divisible by 5 and not 5 - it cannot be a prime
+    if (candidate % 5 == 0) {
+        return candidate == 5;
+    } 
 
     // it sqrt(candidate) is bigger than 200, we check if it is divisible by
     // any of the primes until 200, if so - it cannot be a prime.
@@ -52,6 +59,73 @@ bool is_prime(long candidate) {
 
     // Seems like you got a prime, matey!
     return true;
+}
+
+std::vector<int> primes_to(int n) {
+    std::vector<int> primes;
+
+    if (n <= 200) {
+        for (int i = 0; i < n; i++) {
+            primes.push_back(primesUntil200[i]);
+        }
+        return primes;
+    }
+    
+    primes = primesUntil200;
+
+    for (int i = 211; i <= n;) {
+        if (is_prime(i)) {
+            primes.push_back(i);
+            i+=2;
+            continue;
+        }
+        i++;
+    }
+    return primes;
+}
+
+std::vector<int> sieve_vector(int n) {
+    std::vector<int> primes;
+
+    std::vector<bool> prime(n+1);
+
+    for (int p=2; p*p<=n; p++)  { 
+        if (!prime[p])  { 
+            for (int i=p*p; i<=n; i += p) 
+                prime[i] = true; 
+        } 
+    } 
+  
+    for (int p=2; p<=n; p++)  {
+        if (!prime[p]) {
+            primes.push_back(p);
+        }   
+    }
+    return primes;
+}
+
+std::vector<int> sieve(int n) {
+    std::vector<int> primes;
+
+    if (n > 8000000) {
+        return sieve_vector(n);
+    } 
+    bool prime[n+1];
+    
+    for (int p=2; p*p<=n; p++)  { 
+        if (!prime[p])  { 
+            for (int i=p*p; i<=n; i += p) 
+                prime[i] = true; 
+        } 
+    } 
+  
+    for (int p=2; p<=n; p++)  {
+        if (!prime[p]) {
+            primes.push_back(p);
+        }   
+    }
+    return primes;
+   
 }
 
 std::vector<long> prime_factorize(long n) {
